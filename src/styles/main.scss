@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@600&family=Lato&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+p {
+    margin: 0;
+}
+.header {
+    padding: 10px;
+    background-color: rgba(#0d6efd, 0.8);
+    display: flex;
+    align-items: center;
+    p {
+        font-size: 35px;
+        font-family: 'Edu SA Beginner', cursive;
+        color: #fff;
+        margin-right: 30px;
+    }
+    button {
+        margin: 0;
+        margin-right: 15px;
+    }
+}
