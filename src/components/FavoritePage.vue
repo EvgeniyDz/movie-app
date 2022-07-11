@@ -1,11 +1,9 @@
 <template>
-  <div>
-      Favorite
-    </div>
+  <div>Favorite</div>
 </template>
 
 <script>
 export default {
-  name: 'FavoritePage'
-}
+  name: "FavoritePage",
+};
 </script>
