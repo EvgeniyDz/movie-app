@@ -1,4 +1,4 @@
-// import { SET_ALL_MOVIES } from "../mutationsTypes";
+import { PAGINATION_LENGHT } from "../../constans/constans";
 
 const state = {
   allMovies: [],
@@ -9,8 +9,11 @@ const mutations = {
   },
 };
 const getters = {
-  getMovies(state) {
-    return state.allMovies;
+  getPaginatedMovies: (state) => (page) => {
+    return state.allMovies.slice(
+      page === 1 ? 0 : PAGINATION_LENGHT * (page - 1),
+      PAGINATION_LENGHT * page
+    );
   },
 };
 

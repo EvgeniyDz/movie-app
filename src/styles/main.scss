@@ -22,3 +22,16 @@ p {
         margin-right: 15px;
     }
 }
+
+.custom-card {
+    width: 20%;
+    flex: auto !important;
+    flex-grow: 0 !important;
+}
+
+.page-wrap {
+    padding: 20px;
+    &>div {
+        justify-content: space-between;
+    }
+}
