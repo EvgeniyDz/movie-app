@@ -2,7 +2,7 @@
   <div v-if="fetching" class="d-flex justify-content-center mt-2">
     <b-spinner variant="primary" />
   </div>
-  <div class="page-wrap">
+  <div v-else class="page-wrap">
     <b-card-group deck>
       <MovieItem
         v-for="item in paginatedMovies"
@@ -12,6 +12,7 @@
         :year="item.year"
         :crew="item.crew"
         :imDbRating="item.imDbRating"
+        :id="item.id"
       />
     </b-card-group>
     <b-pagination
