@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import MovieItem from "./MovieItem.vue";
+import MovieItem from "../components/MovieItem.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default {

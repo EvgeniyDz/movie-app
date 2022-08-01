@@ -3,6 +3,7 @@
     <b-spinner variant="primary" />
   </div>
   <div v-else class="page-wrap">
+    <SearchInput />
     <b-card-group deck>
       <MovieItem
         v-for="item in paginatedMovies"
@@ -36,10 +37,11 @@
 import { getTopFilms } from "../services/apiServices";
 import { onMounted, ref, computed } from "vue";
 import { useStore } from "vuex";
-import MovieItem from "./MovieItem.vue";
+import MovieItem from "../components/MovieItem.vue";
+import SearchInput from "../components/SearchInput.vue";
 import { PAGINATION_LENGHT } from "../constans/constans";
 export default {
-  components: { MovieItem },
+  components: { MovieItem, SearchInput },
   setup() {
     const showDismissibleAlert = ref(false);
     const fetching = ref(false);
