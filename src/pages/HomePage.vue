@@ -3,7 +3,7 @@
     <b-spinner variant="primary" />
   </div>
   <div v-else class="page-wrap">
-    <SearchInput />
+    <SearchInput @handlerSearch="handlerSearch" />
     <b-card-group deck>
       <MovieItem
         v-for="item in paginatedMovies"
@@ -59,6 +59,10 @@ export default {
       showDismissibleAlert.value = true;
     };
 
+    const handlerSearch = (txt) => {
+      console.log(txt);
+    };
+
     const paginationHandler = () => {
       window.scrollTo({
         top: 0,
@@ -91,6 +95,7 @@ export default {
       currentPage,
       paginationHandler,
       PAGINATION_LENGHT,
+      handlerSearch,
     };
   },
 };
