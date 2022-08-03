@@ -25,6 +25,11 @@ const getters = {
       PAGINATION_LENGHT * page
     );
   },
+  getSearchedMovies: (state) => (search) => {
+    return state.allMovies.filter((el) => {
+      return el.title.toLowerCase().includes(search.toLowerCase());
+    });
+  },
   getFavoriteMovies: (state) => () => {
     const result = state.allMovies.filter((el) => {
       return state.favoriteIds.includes(el.id);

@@ -4,9 +4,35 @@
   </div>
   <div v-else class="page-wrap">
     <SearchInput @handlerSearch="handlerSearch" />
-    <b-card-group deck>
+    <template v-if="!filteredMovies">
+      <b-card-group deck>
+        <MovieItem
+          v-for="item in paginatedMovies"
+          :key="item.id"
+          :title="item.title"
+          :image="item.image"
+          :year="item.year"
+          :crew="item.crew"
+          :imDbRating="item.imDbRating"
+          :id="item.id"
+        />
+      </b-card-group>
+      <b-pagination
+        v-if="!filteredMovies"
+        v-model="currentPage"
+        :total-rows="allMovies.length"
+        :per-page="PAGINATION_LENGHT"
+        first-text="⏮"
+        prev-text="⏪"
+        next-text="⏩"
+        last-text="⏭"
+        class="mt-4"
+        @page-click="paginationHandler"
+      />
+    </template>
+    <b-card-group deck v-else>
       <MovieItem
-        v-for="item in paginatedMovies"
+        v-for="item in filteredMovies.value"
         :key="item.id"
         :title="item.title"
         :image="item.image"
@@ -16,17 +42,6 @@
         :id="item.id"
       />
     </b-card-group>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="allMovies.length"
-      :per-page="PAGINATION_LENGHT"
-      first-text="⏮"
-      prev-text="⏪"
-      next-text="⏩"
-      last-text="⏭"
-      class="mt-4"
-      @page-click="paginationHandler"
-    />
   </div>
   <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>
     Movies request error
@@ -46,6 +61,7 @@ export default {
     const showDismissibleAlert = ref(false);
     const fetching = ref(false);
     const currentPage = ref(1);
+    const filteredMovies = ref(undefined);
 
     const store = useStore();
 
@@ -60,7 +76,15 @@ export default {
     };
 
     const handlerSearch = (txt) => {
-      console.log(txt);
+      const searchedMovies = computed(() =>
+        store.getters["movies/getSearchedMovies"](txt)
+      );
+      if (txt.length === 0) {
+        filteredMovies.value = undefined;
+      } else {
+        filteredMovies.value = searchedMovies;
+      }
+      console.log(searchedMovies.value);
     };
 
     const paginationHandler = () => {
@@ -96,6 +120,7 @@ export default {
       paginationHandler,
       PAGINATION_LENGHT,
       handlerSearch,
+      filteredMovies,
     };
   },
 };
