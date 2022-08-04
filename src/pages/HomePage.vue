@@ -82,6 +82,11 @@ export default {
       );
       if (txt.length === 0) {
         filteredMovies.value = undefined;
+        if (router.currentRoute.value.query.search) {
+          router.replace({
+            path: router.currentRoute.value.path,
+          });
+        }
       } else {
         filteredMovies.value = searchedMovies;
         router.replace({
