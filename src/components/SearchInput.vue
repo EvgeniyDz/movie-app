@@ -10,12 +10,13 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { vue3Debounce } from "vue-debounce";
+import router from "@/router";
 
 export default {
   directives: {
-    debounce: vue3Debounce({ lock: true }),
+    debounce: vue3Debounce({ lock: true, listenTo: "input" }),
   },
   setup(props, { emit }) {
     const searchText = ref("");
@@ -23,6 +24,12 @@ export default {
     const handleChange = (e) => {
       emit("handlerSearch", e);
     };
+
+    onMounted(() => {
+      if (router.currentRoute.value.query.search) {
+        searchText.value = router.currentRoute.value.query.search;
+      }
+    });
     return {
       searchText,
       handleChange,

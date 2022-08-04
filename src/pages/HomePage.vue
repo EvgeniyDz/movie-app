@@ -52,6 +52,7 @@
 import { getTopFilms } from "../services/apiServices";
 import { onMounted, ref, computed } from "vue";
 import { useStore } from "vuex";
+import router from "@/router";
 import MovieItem from "../components/MovieItem.vue";
 import SearchInput from "../components/SearchInput.vue";
 import { PAGINATION_LENGHT } from "../constans/constans";
@@ -83,8 +84,11 @@ export default {
         filteredMovies.value = undefined;
       } else {
         filteredMovies.value = searchedMovies;
+        router.replace({
+          path: router.currentRoute.value.path,
+          query: { search: txt },
+        });
       }
-      console.log(searchedMovies.value);
     };
 
     const paginationHandler = () => {
@@ -108,6 +112,9 @@ export default {
 
     onMounted(() => {
       getAllMovies();
+      if (router.currentRoute.value.query.search) {
+        handlerSearch(router.currentRoute.value.query.search);
+      }
     });
 
     return {
